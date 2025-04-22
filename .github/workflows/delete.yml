@@ -1,0 +1,22 @@
+name: Azure Temizleme
+
+on:
+  workflow_dispatch:  # Elle çalıştırılır
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Azure Login
+      uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+    - name: Azure Web App Sil
+      run: |
+        az webapp delete --name flask-actions-demo --resource-group my-resource-group
+
+    - name: Resource Group Sil (tamamını siler!)
+      run: |
+        az group delete --name my-resource-group --yes --no-wait
