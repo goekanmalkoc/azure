@@ -17,7 +17,8 @@ resource "azurerm_app_service_plan" "asp" {
     tier = "Free"
     size = "F1"
   }
-
+  
+  kind     = "Linux"        # Bunu ekle
   reserved = true # Linux için
 }
 
